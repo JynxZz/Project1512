@@ -1,0 +1,9 @@
+[submodule "sat2plan"]
+  path = sat2plan
+  url = https://github.com/Orolol/sat2plan.git
+[submodule "Skin_Images"]
+  path = Skin_Images
+  url = https://github.com/Capucine-Darteil/Skin_Images.git
+[submodule "mammo-analysis"]
+  path = mammo-analysis
+  url = https://github.com/Lalucarne51/mammo-analysis.git
