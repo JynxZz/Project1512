@@ -1,0 +1,18 @@
+# Base Image
+FROM python:3.10.6-slim
+
+# Set Working Dir
+WORKDIR /mlflow_server
+
+# Pip Install
+RUN python3 -m pip install --upgrade pip
+RUN pip install mlflow
+
+# Expose Port - 5000
+EXPOSE 5000
+
+# Define Env Var
+ENV MLFLOW_HOME /mlflow_server
+
+# Run the Server
+CMD mlflow server --host 0.0.0.0 --port $PORT --backend-store-uri ./mlruns --default-artifact-root ./mlartifacts
