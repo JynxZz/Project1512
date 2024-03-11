@@ -135,3 +135,4 @@ raw_data/*
 data/*
 jynxzz_room/data/*
 *.csv
+.env.yaml
