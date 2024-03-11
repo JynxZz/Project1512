@@ -134,3 +134,4 @@ drafts/notebooks/*
 raw_data/*
 data/*
 jynxzz_room/data/*
+*.csv
