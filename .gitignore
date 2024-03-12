@@ -97,7 +97,7 @@ celerybeat.pid
 
 # Environments
 .env
-.env.yaml
+*/.env.yaml
 .venv
 .envrc
 env/
