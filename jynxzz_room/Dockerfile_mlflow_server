@@ -15,4 +15,4 @@ EXPOSE 5000
 ENV MLFLOW_HOME /mlflow_server
 
 # Run the Server
-CMD mlflow server --host 0.0.0.0 --port $PORT --backend-store-uri ./mlruns --default-artifact-root ./mlartifacts
+CMD mlflow server --host 0.0.0.0 --port $PORT --backend-store-uri /tmp/mlruns --default-artifact-root /tmp/mlartifacts

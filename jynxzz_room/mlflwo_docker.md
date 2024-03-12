@@ -30,13 +30,13 @@ CMD mlflow server --host 0.0.0.0 --port $PORT --backend-store-uri ./mlruns --def
 Copy this commande to build your image for local
 
 ```bash
-docker build -t $DOCKER_NAME -f Dockerfile_mlflow_server .
+docker build -t $GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$ARTIFACT_REPOSITORY/$DOCKER_NAME -f Dockerfile_mlflow_server .
 ```
 
 Create this one if you are a M-Chip user
 
 ```bash
-docker build --platform linux/amd64 -t $GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$ARTIFACT_REPOSITORY/$DOCKER_NAME:intel -f Dockerfile_mlflow_server .
+docker build --platform linux/amd64 -t $GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$ARTIFACT_REPOSITORY/$DOCKER_NAME:intelv2 -f Dockerfile_mlflow_server .
 ```
 
 ## Run It Locally
@@ -76,11 +76,11 @@ docker push $GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$ARTIFACT_REPOSITORY/$DOCKER
 Now we can deploy in Google Cloud Run
 
 ```bash
-gcloud run deploy $ARTIFACT_REPOSITORY --image $GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$ARTIFACT_REPOSITORY/$DOCKER_NAME:intel --platform managed --memory $MEMORY --allow-unauthenticated --region $GCP_REGION --env-vars-file .env.yaml
+gcloud run deploy $ARTIFACT_REPOSITORY --image $GCP_REGION-docker.pkg.dev/$GCP_PROJECT/$ARTIFACT_REPOSITORY/$DOCKER_NAME:intelv2 --platform managed --memory $MEMORY --allow-unauthenticated --region $GCP_REGION --env-vars-file .env.yaml
 ```
 
 Save your URL app
 
 ```plain text
-https://own-mlflow-server-fbc5geh47a-ew.a.run.app/#/experiments/0?searchFilter=&orderByKey=attributes.start_time&orderByAsc=false&startTime=ALL&lifecycleFilter=Active&modelVersionFilter=All+Runs&datasetsFilter=W10%3D
+https://own-mlflow-server-fbc5geh47a-ew.a.run.app/
 ```
