@@ -8,6 +8,8 @@ WORKDIR /mlflow_server
 RUN python3 -m pip install --upgrade pip
 RUN pip install mlflow
 
+# Volume to store
+VOLUME [ "/mlruns", "/mlartifacts" ]
 # Expose Port - 5000
 EXPOSE 5000
 

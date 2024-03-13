@@ -2,7 +2,7 @@ import os
 import mlflow
 from mlflow.tracking import MlflowClient
 
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
@@ -19,7 +19,8 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # Initialize and train model
-model = RandomForestClassifier()
+model = AdaBoostClassifier()
+# model = RandomForestClassifier()
 model.fit(X_train, y_train)
 
 # Predict and calculate accuracy
@@ -28,10 +29,9 @@ accuracy = accuracy_score(y_test, predictions)
 
 # Start an MLflow run
 with mlflow.start_run():
-
     # Log model
     mlflow.sklearn.log_model(
-        model, artifact_path="tmp/mlartifacts", registered_model_name="model"
+        model, artifact_path="tmp/mlartifacts", registered_model_name=f"model_{model}"
     )
 
     # Log metrics
@@ -39,6 +39,11 @@ with mlflow.start_run():
 
     # Log params
     mlflow.log_param("n_estimators", model.n_estimators)
-    mlflow.log_params(
-        {"max_depth": model.max_depth, "n_estimators": model.n_estimators}
-    )
+    if model == AdaBoostClassifier:
+        mlflow.log_param(
+            {"learning_rate": model.learning_rate, "n_estimators": model.n_estimators}
+        )
+    if model == RandomForestClassifier:
+        mlflow.log_params(
+            {"max_depth": model.max_depth, "n_estimators": model.n_estimators}
+        )
